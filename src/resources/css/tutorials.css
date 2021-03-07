@@ -20,29 +20,29 @@ body{
     font-weight: 500;
     width: 100%;
     margin-left: 0px;
-  }
-  
-  /* Style the links inside the navigation bar */
-  .navbar a {
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
     float: left;
     color: #F2F4F7;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-  }
-  
-  /* Change the color of links on hover */
-  .navbar a:hover {
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
     background-color: #F2F4F7;
     color: #25355A;
-  }
-  
-  /* Add a color to the active/current link */
-  .navbar a.active {
+}
+
+/* Add a color to the active/current link */
+.navbar a.active {
     background-color: #4CAF50;
     color: white;
-  }
+}
 
 .table {
     display: flex;
@@ -59,7 +59,7 @@ body{
 
 .row {
     border: 1px black solid;
-    height: 150px;
+    height: 75px;
     margin: auto;
     width: 100%;
     text-align: center;
@@ -68,7 +68,7 @@ body{
 
 .headerrow {
     border: 1px black solid;
-    height: 150px;
+    height: 30px;
     margin: auto;
     width: 100%;
     text-align: center;
