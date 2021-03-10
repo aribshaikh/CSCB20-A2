@@ -1,0 +1,70 @@
+html {
+    font-family: 'Montserrat', sans-serif;
+    
+}
+
+body{
+    height:100vh;
+    margin: 0px;
+    display:flex; 
+    flex-direction:column;
+    background-color: rgb(241, 243, 247);
+
+}
+
+.navbar {
+    background-color: #25355A;
+    overflow: hidden;
+    position: fixed; 
+    top: 0; 
+    font-weight: 500;
+    width: 100%;
+    margin-left: 0px;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .navbar a {
+    float: left;
+    color: #F2F4F7;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  /* Change the color of links on hover */
+.navbar a:hover {
+    background-color: #F2F4F7;
+    color: #25355A;
+}
+
+/* Add a color to the active/current link */
+.navbar a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+.calendarDiv {
+
+    text-align: center; 
+
+  }
+  
+footer {
+    min-height:95px;
+    margin-top: auto;
+    text-align: center;
+    background-color: #25355A;
+    color: #F2F4F7;
+}
+
+  footer a {
+    color: #F2F4F7;
+    margin-bottom: 10px;
+  }
+
+  
+  p {
+    margin-right: 200px;
+  }
