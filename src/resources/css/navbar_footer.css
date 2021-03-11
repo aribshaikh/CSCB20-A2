@@ -30,9 +30,9 @@ html {
 }
   
   /* Add a color to the active/current link */
-.navbar a.active {
-    background-color: #4CAF50;
-    color: white;
+.navbar a.active-page {
+    background-color: #F2F4F7;
+    color: #25355A;
 }
 
 footer {
