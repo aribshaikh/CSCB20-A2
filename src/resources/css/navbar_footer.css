@@ -5,7 +5,8 @@ html {
 
 .navbar {
     background-color: #25355A;
-    overflow: hidden;
+    overflow: auto;
+    white-space: nowrap;
     position: fixed; 
     top: 0; 
     font-weight: 500;
@@ -15,7 +16,7 @@ html {
   
   /* Style the links inside the navigation bar */
 .navbar a {
-    float: left;
+    display: inline-block;
     color: #F2F4F7;
     text-align: center;
     padding: 14px 16px;
