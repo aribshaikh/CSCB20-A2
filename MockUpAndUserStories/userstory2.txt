@@ -1,0 +1,1 @@
+As a student user, the student should be able to access the syllabus pdf through the home page

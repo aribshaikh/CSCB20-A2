@@ -1,0 +1,1 @@
+As a student user, when the student navigates to the assignment page, they should be able to access all the assignment handouts

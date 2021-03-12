@@ -1,0 +1,1 @@
+As a student user, when a student navigates to the labs portion of the site, they should be able to access lab/tutorial times and material for all the tutorial/labs
