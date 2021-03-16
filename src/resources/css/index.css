@@ -1,27 +1,21 @@
-/* Add a black background color to the top navigation */
-
-html {
-  font-family: 'Montserrat', sans-serif;
-    
-}
-
-body {
-  height:100vh;
-  margin: 0px;
-  display:flex; 
-  flex-direction:column;
-}
-
 textarea {
   margin: 20px;
   margin-top: 5px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 button {
   text-align: center;
   margin: 20px;
+  margin-left: 10%;
   width:150px; 
   height:70px;
+}
+
+p {
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 h1 {
