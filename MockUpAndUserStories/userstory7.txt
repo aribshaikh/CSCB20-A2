@@ -1,1 +1,1 @@
-As a student user, the student should be able to access the Piazza forum through the discussion board link
+As a student user, the student should be able to access the Zoom link for the lecture on the homepage under the "lecture" section

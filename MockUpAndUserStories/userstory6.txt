@@ -1,1 +1,1 @@
-As a student user, the student should be able to view information for the midterm and final exam alongside practice tests
+As a student user, the student should be able to view instructor information on the homepage
