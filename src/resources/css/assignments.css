@@ -4,6 +4,20 @@ h2 {
 .assignmentTitle {
   text-align: center;
 }
+.assOverview{
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  padding: 2px 16px;
+  justify-content: space-between;
+  align-items: center;
+}
 .assignmentDiv {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: rgb(223, 210, 210);
@@ -13,7 +27,7 @@ h2 {
   align-items: center;
 }
 
-.assignmentCard {
+.assignmentBox {
   background-color: rgb(231, 231, 231);
   display: flex;
   flex-direction: column;
