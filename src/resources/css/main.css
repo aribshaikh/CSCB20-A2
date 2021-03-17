@@ -1,8 +1,10 @@
+/* CSS for html and body tags, re-used across all pages*/
+
 html {
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
-body{
+body {
   height:100vh;
   margin: 0px;
   display:flex; 

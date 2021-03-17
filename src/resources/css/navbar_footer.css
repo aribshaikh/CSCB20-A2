@@ -1,50 +1,49 @@
+/* CSS for navbar and footer elements, re-used across all pages*/
+
 .navbar {
-    background-color: #25355A;
-    overflow: auto;
-    white-space: nowrap;
-    position: fixed; 
-    top: 0; 
-    font-weight: 500;
-    width: 100%;
-    margin-left: 0px;
+  background-color: #25355A;
+  overflow: auto;
+  white-space: nowrap;
+  position: fixed; 
+  top: 0; 
+  font-weight: 500;
+  width: 100%;
+  margin-left: 0px;
 }
   
-  /* Style the links inside the navigation bar */
 .navbar a {
-    display: inline-block;
-    color: #F2F4F7;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+  display: inline-block;
+  color: #F2F4F7;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
   
-  /* Change the color of links on hover */
 .navbar a:hover {
-    background-color: #F2F4F7;
-    color: #25355A;
+  background-color: #F2F4F7;
+  color: #25355A;
 }
   
-  /* Add a color to the active/current link */
 .navbar a.active-page {
-    background-color: #F2F4F7;
-    color: #25355A;
+  background-color: #F2F4F7;
+  color: #25355A;
 }
 
 footer {
-    min-height:95px;
-    margin-top: auto;
-    text-align: center;
-    background-color: #25355A;
-    color: #F2F4F7;
+  min-height:95px;
+  margin-top: auto;
+  text-align: center;
+  background-color: #25355A;
+  color: #F2F4F7;
 }
 
 footer a {
-    color: #F2F4F7;
-    margin-bottom: 10px;
-  }
+  color: #F2F4F7;
+  margin-bottom: 10px;
+}
 
 footer p {
-    margin-right: 0px;
-    margin-left: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
 }

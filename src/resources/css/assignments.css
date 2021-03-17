@@ -4,7 +4,7 @@ h2 {
 .assignmentTitle {
   text-align: center;
 }
-.assOverview{
+.assOverview {
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;

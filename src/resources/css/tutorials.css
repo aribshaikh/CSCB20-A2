@@ -1,35 +1,35 @@
 .table {
-    display: flex;
-    margin: auto;
-    margin-top: 75px;
-    width: 75%;
+  display: flex;
+  margin: auto;
+  margin-top: 75px;
+  width: 75%;
 }
 
 .column {
-    margin-bottom: 1em;
-    width: 100%;
+  margin-bottom: 1em;
+  width: 100%;
 }
 
 .row {
-    border: 1px black solid;
-    height: 75px;
-    margin: auto;
-    width: 100%;
-    text-align: center;
-    padding: 0 0;
+  border: 1px black solid;
+  height: 75px;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  padding: 0 0;
 }
 
 .headerrow {
-    border: 1px black solid;
-    height: 30px;
-    margin: auto;
-    width: 100%;
-    text-align: center;
-    padding: 0 0;
-    font-weight: bold;
-    background-color: rgb(238, 238, 127);
+  border: 1px black solid;
+  height: 30px;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  padding: 0 0;
+  font-weight: bold;
+  background-color: rgb(238, 238, 127);
 }
 
 ul {
-    margin-bottom: 50px;
+  margin-bottom: 50px;
 }
