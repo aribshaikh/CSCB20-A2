@@ -4,7 +4,6 @@
   flex-direction: column;
   flex-grow: 1;
   margin:0px auto;
-  /* margin-right: 12px; */
   margin-top:80px;
   margin-bottom: 12px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -16,8 +15,7 @@
   align-items: center;
   width: 800px;
   height:600px;
-  /* background-color: rgb(255, 255, 255); */
-    text-align: center;
+  
 }
 
 a.ical {
