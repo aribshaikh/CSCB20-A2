@@ -42,11 +42,54 @@ def close_connection(exception):
 @app.route('/')
 def index():
 	if 'username' in session:
-		return 'Logged in as %s <a href="/logout">Logout</a>' % escape(session['username'])
-	return 'You are not logged in'
+		return render_template("index.html")
+	return redirect(url_for('login'))
+
+@app.route('/calendar')
+def calendar():
+	if 'username' in session:
+		return render_template("calendar.html")
+	return redirect(url_for('login'))
+
+@app.route('/lectures')
+def lectures():
+	if 'username' in session:
+		return render_template("lectures.html")
+	return redirect(url_for('login'))
+
+@app.route('/tutorials')
+def tutorials():
+	if 'username' in session:
+		return render_template("tutorials.html")
+	return redirect(url_for('login'))
+
+@app.route('/assignments')
+def assignments():
+	if 'username' in session:
+		return render_template("assignments.html")
+	return redirect(url_for('login'))
+
+@app.route('/tests')
+def tests():
+	if 'username' in session:
+		return render_template("tests.html")
+	return redirect(url_for('login'))
+
+@app.route('/links')
+def links():
+	if 'username' in session:
+		return render_template("links.html")
+	return redirect(url_for('login'))
+
+@app.route('/grades')
+def grades():
+	if 'username' in session:
+		return render_template("grades.html")
+	return redirect(url_for('login'))
 
 @app.route('/login',methods=['GET','POST'])
 def login():
+	error=None
 	if request.method=='POST':
 		sql = """
 			SELECT *
@@ -58,17 +101,12 @@ def login():
 				if result[1]==request.form['password']:
 					session['username']=request.form['username']
 					return redirect(url_for('index'))
-		return "Incorrect UserName/Password"
+		error="Incorect username or password"
+		return render_template('login.html', error=error)
 	elif 'username' in session:
 		return redirect(url_for('index'))
 	else:
-		return '''
-			<form method="post">
-			<p>Enter your username: <input type=text name=username>
-			<p>Enter your password: <input type=password name=password>
-			<p><input type=submit value=Submit>
-			</form>
-			'''
+		return render_template("login.html")
 @app.route('/logout')
 def logout():
 	session.pop('username', None)

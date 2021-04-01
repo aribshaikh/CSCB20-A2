@@ -27,6 +27,9 @@
                             <div>
                                 <input class='inputButton' type="submit" value="Log In">
                             </div>
+                            {% if error %}
+                                <p class=error><strong>Error:</strong> {{ error }}
+                            {% endif %}
                             <div>
                                 <br>Don't have an account? <br> <a href="register.html">Create account here</a>.
                             </div>

@@ -9,9 +9,20 @@
   font-weight: 500;
   width: 100%;
   margin-left: 0px;
+  text-align: left;
 }
-  
-.navbar a {
+
+.logout {
+  padding-left: 5px;
+  padding-bottom: 5px;
+  color:#F2F4F7
+}
+
+.links {
+  text-align: center;
+}
+
+.links a {
   display: inline-block;
   color: #F2F4F7;
   text-align: center;
@@ -19,13 +30,13 @@
   text-decoration: none;
   font-size: 17px;
 }
-  
-.navbar a:hover {
+
+.links a:hover {
   background-color: #F2F4F7;
   color: #25355A;
 }
-  
-.navbar a.active-page {
+
+.links a.active-page {
   background-color: #F2F4F7;
   color: #25355A;
 }
