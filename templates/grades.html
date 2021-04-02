@@ -27,43 +27,54 @@
                 <a href="links.html">Links</a>
                 <a href="grades.html">Grades</a>
                 <a href="feedback.html">Feedback</a>
-                <a href="remark.html">Remark Request</a>
+                <a class="remark" href="./remark">Remark Request</a>
             </div>
         </div>
+        {% if session['student'] %}
         <div class='Box'>
                 <h2>Grades</h2>
                 <div class="table">
                         <div class="column">
                             <div class="headerrow">Assessment</div>
-                            <div class="row">Q1</div>
-                            <div class="row">Q2</div>
+                            {% for grades in student_grades %}
+                            <div class="row">{{grades['mark_id']}}</div>
+                            {% endfor %}
+                            <!-- <div class="row">Q2</div>
                             <div class="row">Q3</div>
                             <div class="row">Q4</div>
                             <div class="row">A1</div>
                             <div class="row">A2</div>
                             <div class="row">A3</div>
-                            <div class="row">Final</div>
+                            <div class="row">Final</div> -->
                         </div>
                         <div class="column">
                             <!-- Will create a for loop for when marks are retrieved through sql -->
                                 <div class="headerrow">Mark</div>
+                            {% for grades in student_grades %}
+                            <div class="row">{{grades['mark']}}</div>
+                            {% endfor %}
+                                <!-- <div class="row"></div>
                                 <div class="row"></div>
                                 <div class="row"></div>
                                 <div class="row"></div>
                                 <div class="row"></div>
                                 <div class="row"></div>
                                 <div class="row"></div>
-                                <div class="row"></div>
-                                <div class="row"></div>
+                                <div class="row"></div> -->
                         </div>
                 </div>
 
+        </div>
+        {% endif %}
 
-
+        {% if session['instructor'] %}
+        <div class='Box'>
+                <h2>Grades (Instructor View)</h2>
         </div>
         <footer>
                 <p>Authors: Arib Shaikh and Owen Chiu<br>
                 <br>
                 <a href="https://web.cs.toronto.edu/" target="_blank">Faculty of Computer Science at UofT</a></p>
             </footer>
+            {% endif %}
     </body>

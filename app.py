@@ -69,23 +69,90 @@ def assignments():
 		return render_template("assignments.html")
 	return redirect(url_for('login'))
 
-@app.route('/tests')
+@app.route('/feedback')
 def tests():
 	if 'username' in session:
-		return render_template("tests.html")
+		return render_template("feedback.html")
 	return redirect(url_for('login'))
 
-@app.route('/links')
+@app.route('/remark')
 def links():
 	if 'username' in session:
-		return render_template("links.html")
+		return render_template("remark.html")
 	return redirect(url_for('login'))
 
 @app.route('/grades')
-def grades():
+def retrieveGrades():
 	if 'username' in session:
-		return render_template("grades.html")
-	return redirect(url_for('login'))
+		student_session = session.get('student')
+		instructor_session = session.get('instructor')
+		db = get_db()
+		db.row_factory = make_dicts
+		if student_session:
+			student_grades = query_db(
+				"SELECT mark_id, mark FROM marks WHERE susername = ?",[session['username']] , one=False)
+			db.close()
+			return render_template("grades.html", student_grades = student_grades)
+
+	
+	return render_template("grades.html")
+
+@app.route('/remarkRequest', methods=['GET','POST'])
+def remarkRequest():
+	# if 'username' in session:
+
+	student_session = session.get('student')
+	instructor_session = session.get('instructor')
+	render_template('grades.html')
+	username = session.get('student')
+	assignment = request.form.get('aName')
+	reason = request.form.get('reason')
+		# if (assignment == 'Select an evaluation') or (reason == ''):
+		# 	return redirect(url_for('remark'))
+
+		# else:
+	db = get_db()
+	db.row_factory = make_dicts
+		# insert into db
+
+	if request.method=='POST':
+
+		query_db("INSERT INTO remark_requests (susername, mark_id, comment) VALUES (?, ?, ?)", [
+			username, assignment, reason])
+		db.commit()
+		db.close()
+		return redirect("/grades")
+	return redirect("/login")
+
+@app.route('/sendFeedback', methods=['GET','POST'])
+def sendFeedback():
+	# if 'username' in session:
+
+	student_session = session.get('student')
+	instructor_session = session.get('instructor')
+	instructor = request.form.get('instructorname')
+	feedback1 = request.form.get('feedback1')
+	feedback2 = request.form.get('feedback2')
+	feedback3 = request.form.get('feedback3')
+	feedback4 = request.form.get('feedback4')
+
+
+		# if (assignment == 'Select an evaluation') or (reason == ''):
+		# 	return redirect(url_for('remark'))
+
+		# else:
+	db = get_db()
+	db.row_factory = make_dicts
+		# insert into db
+
+	if request.method=='POST':
+
+		query_db("INSERT INTO feedback (iusername, question, comment) VALUES (?, ?, ?)", [
+			instructor, 'What do you like about the instructor teaching?', feedback1])
+		db.commit()
+		db.close()
+		return redirect("/")
+	return redirect("/login")
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -125,13 +192,18 @@ def login():
 			SELECT *
 			FROM students
 			"""
+		
+		# For the student case
+		session['student'] = True
+		session['instructor'] = False
+
 		results = query_db(sql, args=(), one=False)
 		for result in results:
 			if result[0]==request.form['username']:
 				if result[1]==request.form['password']:
 					session['username']=request.form['username']
 					return redirect(url_for('index'))
-		error="Incorect username or password"
+		error="Incorrect username or password"
 		return render_template('login.html', error=error)
 	elif 'username' in session:
 		return redirect(url_for('index'))
