@@ -87,6 +87,36 @@ def grades():
 		return render_template("grades.html")
 	return redirect(url_for('login'))
 
+@app.route('/register',methods=['GET','POST'])
+def register():
+	if 'username' in session:
+		return redirect(url_for('index'))
+	elif request.method=="POST":
+		username=request.form['username']
+		password=request.form['password']
+		usertype=request.form['usertype']+"s"
+		lecsession=request.form['session']
+		sql1 = "select * from ?"
+		results = query_db(sql1, [usertype])
+		if len(username)<1:
+			error="please enter a username"
+			return render_template("register.html", error=error)
+		elif len(password)<1:
+			error="please enter a password"
+			return render_template("register.html", error=error)
+		elif usertype not in ("students", "instructors"):
+			error="please pick a user type"
+			return render_template("register.html", error=error)
+		for result in results:
+			if result[0]==username:
+				error=username+"is already taken, please pick a different one"
+				return render_template("register.html", error=error)
+		sql2="insert into ? values('?','?', '?')"
+		insert=query_db(sql2, [usertype, username, password, lecsession])
+		return redirect(url_for('login'))	
+	else:
+		return render_template("register.html")
+
 @app.route('/login',methods=['GET','POST'])
 def login():
 	error=None
@@ -107,6 +137,7 @@ def login():
 		return redirect(url_for('index'))
 	else:
 		return render_template("login.html")
+
 @app.route('/logout')
 def logout():
 	session.pop('username', None)

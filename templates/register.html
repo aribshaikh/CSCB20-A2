@@ -18,23 +18,32 @@
                     <h2>Register Account</h2>
             <div class='registerFormBox'>
                     <form action="/login" method="POST">
-                        <label>Username</label>
+                        <label>*Username</label>
                         <input class='inputStyle' type="text" name="username" placeholder="Username">
         
-                        <label>Password</label>
+                        <label>*Password</label>
                         <input class='inputStyle' type="text" name="password" placeholder="Password">
                         
-                        <label>User Type</label>
+                        <label>*User Type</label>
                         <select class='inputStyle' id="userTypeDropDown" name="usertype">
                             <option disabled selected>Select a user type</option>
-                            <option> Student </option>
-                            <option> Instructor </option>
+                            <option> student </option>
+                            <option> instructor </option>
                         </select>
+                        <label>Session</label>
+                        <select class='inputStyle' id="userTypeDropDown" name="session">
+                            <option disabled selected>Select a session</option>
+                            <option> LEC01 </option>
+                            <option> LEC02 </option>
+                        </select>
+                        {% if error %}
+                            <p class=error><strong>Error:</strong> {{ error }}
+                        {% endif %}
                             <div>
                                 <input class='inputButton' type="submit" value="Create Account">
                             </div>
                             <div>
-                                <br> <a href="login.html">Go back to Login Page</a>.
+                                <br> <a href="./login">Go back to Login Page</a>.
                             </div>
                         </div>
                     </form>
