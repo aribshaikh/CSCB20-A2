@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS marks(
 	);
 	
 CREATE TABLE IF NOT EXISTS remark_requests(
-	susername VARCHAR(256) NOT NULL PRIMARY KEY,
+	susername VARCHAR(256) NOT NULL,
 	mark_id VARCHAR(256) NOT NULL,
 	comment VARCHAR(256),
 	FOREIGN KEY(susername) REFERENCES students(susername)
@@ -76,6 +76,6 @@ INSERT INTO marks VALUES('student2', 'Q4', 30);
 INSERT INTO marks VALUES('student2', 'A1', 58);
 INSERT INTO marks VALUES('student2', 'A2', 99);
 
-INSERT INTO marks VALUES('student2', 'A2', 'my last answer was graded wrong');
-INSERT INTO marks VALUES('student1', 'Q2', 'my first answer was graded wrong');
-INSERT INTO marks VALUES('a', 'Final', 'question 4 was graded wrong because ...');
+INSERT INTO remark_requests VALUES('student2', 'A2', 'my last answer was graded wrong');
+INSERT INTO remark_requests VALUES('student1', 'Q2', 'my first answer was graded wrong');
+INSERT INTO remark_requests VALUES('a', 'Final', 'question 4 was graded wrong because ...');
