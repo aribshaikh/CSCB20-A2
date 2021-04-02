@@ -37,17 +37,26 @@
 
 
             <form action="{{ url_for('sendFeedback') }}" method="POST">
-                <label>Feedback</label>
-                <textarea class="feedbackTextArea" name="feedback"
-                    placeholder="Enter your feedback here..."></textarea>
-
-                <label>Instructors</label>
+                    <label>Instructors</label>
                 <select class="inputStyle" id="instructrNameDropdown" name="instructorname">
                     <option disabled selected>Select an instructor</option>
                 </select>
-                            <input class='inputButton' type="submit" value="Submit Feedback">
-                    </div>
+                    <label>What do you like about the instructor teaching?</label>
+                    <input class='inputStyle' type="text" name="feedback1" placeholder="Answer">
+    
+                    <label>What do you recommend the instructor to do to improve their teaching?</label>
+                    <input class='inputStyle' type="text" name="feedback2" placeholder="Answer">
+
+                    <label>What do you like about the labs?</label>
+                    <input class='inputStyle' type="text" name="feedback3" placeholder="Answer">
+
+                    <label>What do you recommend the lab instructors to do to improve their lab teaching?</label>
+                    <input class='inputStyle' type="text" name="feedback4" placeholder="Answer">
+                
+                    <input class='inputButton' type="submit" value="Submit Feedback">
                 </form>
+            </div>
+
         </div>
         <footer>
                 <p>Authors: Arib Shaikh and Owen Chiu<br>
