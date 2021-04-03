@@ -158,13 +158,13 @@ def sendFeedback():
 def register():
 	if 'username' in session:
 		return redirect(url_for('index'))
-	elif request.method=="POST":
-		username=request.form['username']
-		password=request.form['password']
-		usertype=request.form['usertype']+"s"
-		lecsession=request.form['session']
-		sql1 = "select * from ?"
-		results = query_db(sql1, [usertype])
+	elif request.method=='POST':
+		username=request.form.get('username')
+		password=request.form.get('password')
+		usertype=request.form.get('usertype')
+		if usertype is not None:
+			usertype+="s"
+		lecsession=request.form.get('session')
 		if len(username)<1:
 			error="please enter a username"
 			return render_template("register.html", error=error)
@@ -174,13 +174,23 @@ def register():
 		elif usertype not in ("students", "instructors"):
 			error="please pick a user type"
 			return render_template("register.html", error=error)
+		if usertype == "students":
+			sql1 = "SELECT * FROM students"
+		elif usertype == "instructors":
+			sql1 = "SELECT * FROM instructors"
+		results = query_db(sql1, args=(), one=False)
 		for result in results:
 			if result[0]==username:
-				error=username+"is already taken, please pick a different one"
+				error="username "+username+" is already taken, please pick a different one"
 				return render_template("register.html", error=error)
-		sql2="insert into ? values('?','?', '?')"
-		insert=query_db(sql2, [usertype, username, password, lecsession])
-		return redirect(url_for('login'))	
+		if usertype == "students":
+			sql2="insert into students values(?,?,?)"
+		elif usertype == "instructors":
+			sql2="insert into instructors values(?,?,?)"
+		query_db(sql2, [username, password, lecsession])
+		db.commit()
+		db.close()
+		return redirect(url_for('login'))
 	else:
 		return render_template("register.html")
 

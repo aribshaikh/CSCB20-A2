@@ -1,37 +1,37 @@
 --Creating tables
 CREATE TABLE IF NOT EXISTS students(
-	susername VARCHAR(256) NOT NULL PRIMARY KEY,
+	username VARCHAR(256) NOT NULL PRIMARY KEY,
 	password VARCHAR(256) NOT NULL,
 	sessionn VARCHAR(256)
 	);
 	
 CREATE TABLE IF NOT EXISTS instructors(
-	iusername VARCHAR(256) NOT NULL PRIMARY KEY,
+	username VARCHAR(256) NOT NULL PRIMARY KEY,
 	password VARCHAR(256) NOT NULL,
 	sessionn VARCHAR(256)
 	);
 	
 CREATE TABLE IF NOT EXISTS feedback(
-	iusername VARCHAR(256) NOT NULL,
+	username VARCHAR(256) NOT NULL,
 	question VARCHAR(256) NOT NULL,
 	comment VARCHAR(256),
-	FOREIGN KEY(iusername) REFERENCES instructors(iusername)
+	FOREIGN KEY(username) REFERENCES instructors(username)
 	);
 	
 CREATE TABLE IF NOT EXISTS marks(
-	susername VARCHAR(256) NOT NULL,
+	username VARCHAR(256) NOT NULL,
 	mark_id VARCHAR(256) NOT NULL,
 	mark INTEGER NOT NULL,
-	FOREIGN KEY(susername) REFERENCES students(susername),
+	FOREIGN KEY(username) REFERENCES students(username),
 	CHECK (mark_id IN ('Q1', 'Q2', 'Q3', 'Q4', 'A1', 'A2', 'A3', 'Final')),
-	CHECK (value > -1 and value <101)
+	CHECK (mark > -1 and mark <101)
 	);
 	
 CREATE TABLE IF NOT EXISTS remark_requests(
-	susername VARCHAR(256) NOT NULL,
+	username VARCHAR(256) NOT NULL,
 	mark_id VARCHAR(256) NOT NULL,
 	comment VARCHAR(256),
-	FOREIGN KEY(susername) REFERENCES students(susername)
+	FOREIGN KEY(username) REFERENCES students(username)
 	);
 	
 --Inserting values
