@@ -111,7 +111,11 @@ def retrieveGrades():
 				"SELECT mark_id, mark FROM marks WHERE username = ?",[session['username']] , one=False)
 			db.close()
 			return render_template("grades.html", student_grades = student_grades)
-
+		if instructor_session:
+			instructor_grades = query_db(
+				"select s.username,	sum(case when m.mark_id = 'Q1' then m.mark end) Q1,	sum(case when m.mark_id = 'Q2' then m.mark end) Q2,	sum(case when m.mark_id = 'Q3' then m.mark end) Q3,	sum(case when m.mark_id = 'Q4' then m.mark end) Q4,	sum(case when m.mark_id = 'A1' then m.mark end) A1,	sum(case when m.mark_id = 'A2' then m.mark end) A2,	sum(case when m.mark_id = 'A3' then m.mark end) A3,	sum(case when m.mark_id = 'Final' then m.mark end) Final from students s left outer join marks m on m.username=s.username group by s.username", one=False)
+			db.close()
+			return render_template("grades.html", instructor_grades = instructor_grades)
 	
 	return render_template("grades.html")
 
