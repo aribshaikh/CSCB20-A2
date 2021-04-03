@@ -218,7 +218,8 @@ def register():
 		query_db(sql2, [username, password, lecsession])
 		db.commit()
 		db.close()
-		return redirect(url_for('login'))
+		session['username']=request.form['username']
+		return redirect(url_for('index'))
 	else:
 		return render_template("register.html")
 
@@ -226,6 +227,35 @@ def register():
 def login():
 	error=None
 	if request.method=='POST':
+		db = get_db()
+		sql = """
+			SELECT *
+			FROM students
+			"""
+		
+		# For the student case
+		session['student'] = True
+		session['instructor'] = False
+
+		results = query_db(sql, args=(), one=False)
+		for result in results:
+			if result[0]==request.form['username']:
+				if result[1]==request.form['password']:
+					session['username']=request.form['username']
+					db.close()
+					return redirect(url_for('index'))
+		error="Incorrect username or password"
+		return render_template('login.html', error=error)
+	elif 'username' in session:
+		return redirect(url_for('index'))
+	else:
+		return render_template("login.html")
+
+@app.route('/instructorLogin',methods=['GET','POST'])
+def instructorLogin():
+	error=None
+	if request.method=='POST':
+		db = get_db()
 		sql = """
 			SELECT *
 			FROM instructors
@@ -240,13 +270,14 @@ def login():
 			if result[0]==request.form['username']:
 				if result[1]==request.form['password']:
 					session['username']=request.form['username']
+					db.close()
 					return redirect(url_for('index'))
 		error="Incorrect username or password"
-		return render_template('login.html', error=error)
+		return render_template('instructorLogin.html', error=error)
 	elif 'username' in session:
 		return redirect(url_for('index'))
 	else:
-		return render_template("login.html")
+		return render_template("instructorLogin.html")
 
 @app.route('/logout')
 def logout():
