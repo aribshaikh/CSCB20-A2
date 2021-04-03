@@ -69,7 +69,71 @@
 
         {% if session['instructor'] %}
         <div class='Box'>
-                <h2>Grades (Instructor View)</h2>
+            <h2>Grades (Instructor View)</h2>
+            <div class="table">
+                <div class="column">
+                    <div class="headerrow">Assessment</div>
+                    {% for grades in student_grades %}
+                    <div class="row">{{grades['username']}}</div>
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <!-- Will create a for loop for when marks are retrieved through sql -->
+                    <div class="headerrow">Q1</div>
+                    {% for grades in instructor_grades %}
+                    <div class="row">{{grades['Q1']}}</div>
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <!-- Will create a for loop for when marks are retrieved through sql -->
+                    <div class="headerrow">Q2</div>
+                    {% for grades in instructor_grades %}
+                    <div class="row">{{grades['Q2']}}</div>
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <!-- Will create a for loop for when marks are retrieved through sql -->
+                    <div class="headerrow">Q3</div>
+                    {% for grades in instructor_grades %}
+                    <div class="row">{{grades['Q3']}}</div>
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <!-- Will create a for loop for when marks are retrieved through sql -->
+                    <div class="headerrow">Q4</div>
+                    {% for grades in instructor_grades %}
+                    <div class="row">{{grades['Q4']}}</div>
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <!-- Will create a for loop for when marks are retrieved through sql -->
+                    <div class="headerrow">A1</div>
+                    {% for grades in instructor_grades %}
+                    <div class="row">{{grades['A1']}}</div>
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <!-- Will create a for loop for when marks are retrieved through sql -->
+                    <div class="headerrow">A2</div>
+                    {% for grades in instructor_grades %}
+                    <div class="row">{{grades['A2']}}</div>
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <!-- Will create a for loop for when marks are retrieved through sql -->
+                    <div class="headerrow">A3</div></div>
+                    {% for grades in instructor_grades %}
+                    <div class="row">{{grades['A3']}}</div>
+                    {% endfor %}
+                </div>
+                <div class="column">
+                    <!-- Will create a for loop for when marks are retrieved through sql -->
+                    <div class="headerrow">Final</div>
+                    {% for grades in instructor_grades %}
+                    <div class="row">{{grades['Final']}}</div>
+                    {% endfor %}
+                </div>
+            </div>s
         </div>
         <footer>
                 <p>Authors: Arib Shaikh and Owen Chiu<br>
