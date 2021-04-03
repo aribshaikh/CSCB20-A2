@@ -30,6 +30,8 @@
                 <a href="remark.html">Remark Request</a>
             </div>
         </div>
+        {% if session['student'] %}
+
                 <div class='feedbackBox'>
                     <h2>Anonymous Feedback</h2>
 
@@ -40,7 +42,10 @@
                     <label>Instructors</label>
                 <select class="inputStyle" id="instructrNameDropdown" name="instructorname">
                     <option disabled selected>Select an instructor</option>
-                    <option>Instructor1</option>
+                    {% for instructor in instructors %}
+                    <option>{{instructor['username']}}</option>
+                    {% endfor %}
+
 
                 </select>
                     <label>What do you like about the instructor teaching?</label>
@@ -60,6 +65,17 @@
             </div>
 
         </div>
+        {% endif %}
+
+        {% if session['instructor'] %}
+        {% for feedback in feedbacks %}
+
+            <div class = "feedbackBox">
+                <h3>Question: {{feedback['question']}}</h3><br>
+                <p>{{feedback['comment']}}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
         <footer>
                 <p>Authors: Arib Shaikh and Owen Chiu<br>
                 <br>

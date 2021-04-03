@@ -30,6 +30,7 @@
                 <a href="remark.html">Remark Request</a>
             </div>
         </div>
+        {% if session['student'] %}
         <div class = "remarkBox">
                 <h2>Remark Request</h2>
                 <div class='remarkFormBox'>
@@ -59,6 +60,19 @@
                 </div>
 
         </div>
+        {% endif %}
+
+        {% if session['instructor'] %}
+        {% for requests in remarks %}
+
+            <div class = "remarkBox">
+                <h3>Assessment: {{requests['mark_id']}}</h3><br>
+                <p>Username: {{requests['username']}}</p><br>
+                <p>{{requests['comment']}}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
+
         <footer>
                 <p>Authors: Arib Shaikh and Owen Chiu<br>
                 <br>

@@ -70,16 +70,34 @@ def assignments():
 	return redirect(url_for('login'))
 
 @app.route('/feedback')
-def tests():
+def feedback():
 	if 'username' in session:
+		if session.get('instructor'):
+			db = get_db()
+			db.row_factory = make_dicts
+			feedbacks = query_db("SELECT question, comment FROM feedback WHERE username = ?",[session['username']], one=False)
+			db.close()
+			return render_template("feedback.html", feedbacks = feedbacks)
+		elif session.get('student'):
+			db = get_db()
+			db.row_factory = make_dicts
+			instructors = query_db("SELECT username FROM instructors", one=False)
+			print(instructors)
+			return render_template("feedback.html",instructors = instructors)
 		return render_template("feedback.html")
 	return redirect(url_for('login'))
 
 @app.route('/remark')
-def links():
+def remark():
 	if 'username' in session:
-		return render_template("remark.html")
-	return redirect(url_for('login'))
+		if session.get('instructor'):
+			db = get_db()
+			db.row_factory = make_dicts
+			remarks = query_db("SELECT username, mark_id, comment FROM remark_requests", one=False)
+			db.close()
+			return render_template("remark.html", remarks = remarks)
+	return render_template("remark.html")
+	#return redirect(url_for('login'))
 
 @app.route('/grades')
 def retrieveGrades():
@@ -90,7 +108,7 @@ def retrieveGrades():
 		db.row_factory = make_dicts
 		if student_session:
 			student_grades = query_db(
-				"SELECT mark_id, mark FROM marks WHERE susername = ?",[session['username']] , one=False)
+				"SELECT mark_id, mark FROM marks WHERE username = ?",[session['username']] , one=False)
 			db.close()
 			return render_template("grades.html", student_grades = student_grades)
 
@@ -117,7 +135,7 @@ def remarkRequest():
 
 	if request.method=='POST':
 
-		query_db("INSERT INTO remark_requests (susername, mark_id, comment) VALUES (?, ?, ?)", [
+		query_db("INSERT INTO remark_requests (username, mark_id, comment) VALUES (?, ?, ?)", [
 			username, assignment, reason])
 		db.commit()
 		db.close()
@@ -147,8 +165,15 @@ def sendFeedback():
 
 	if request.method=='POST':
 
-		query_db("INSERT INTO feedback (iusername, question, comment) VALUES (?, ?, ?)", [
+		query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
 			instructor, 'What do you like about the instructor teaching?', feedback1])
+		query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
+			instructor, 'What do you recommend the instructor to do to improve their teaching?', feedback2])	
+		query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
+			instructor, 'What do you like about the labs?', feedback3])	
+		query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
+			instructor, 'What do you recommend the lab instructors to do to improve their lab teaching?', feedback4])	
+
 		db.commit()
 		db.close()
 		return redirect("/")
@@ -178,6 +203,9 @@ def register():
 			sql1 = "SELECT * FROM students"
 		elif usertype == "instructors":
 			sql1 = "SELECT * FROM instructors"
+		
+		db = get_db()
+        # db.row_factory = make_dicts
 		results = query_db(sql1, args=(), one=False)
 		for result in results:
 			if result[0]==username:
@@ -200,12 +228,12 @@ def login():
 	if request.method=='POST':
 		sql = """
 			SELECT *
-			FROM students
+			FROM instructors
 			"""
 		
 		# For the student case
-		session['student'] = True
-		session['instructor'] = False
+		session['student'] = False
+		session['instructor'] = True
 
 		results = query_db(sql, args=(), one=False)
 		for result in results:
