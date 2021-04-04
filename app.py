@@ -133,7 +133,7 @@ def retrieveGrades():
 
 @app.route('/remarkRequest', methods=['GET','POST'])
 def remarkRequest():
-	# if 'username' in session:
+	if 'username' in session:
 
 		student_session = session.get('student')
 		instructor_session = session.get('instructor')
