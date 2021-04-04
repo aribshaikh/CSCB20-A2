@@ -69,6 +69,18 @@ def assignments():
 		return render_template("assignments.html")
 	return redirect(url_for('login'))
 
+@app.route('/tests')
+def tests():
+	if 'username' in session:
+		return render_template("tests.html")
+	return redirect(url_for('login'))
+
+@app.route('/links')
+def links():
+	if 'username' in session:
+		return render_template("links.html")
+	return redirect(url_for('login'))
+
 @app.route('/feedback')
 def feedback():
 	if 'username' in session:
