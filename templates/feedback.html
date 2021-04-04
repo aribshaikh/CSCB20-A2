@@ -61,6 +61,11 @@
                     <input class='inputStyle' type="text" name="feedback4" placeholder="Answer">
                 
                     <input class='inputButton' type="submit" value="Submit Feedback">
+                    <br>
+                    <br>
+                    {% if message %}
+                        {{message}}
+                    {% endif %}
                 </form>
             </div>
 

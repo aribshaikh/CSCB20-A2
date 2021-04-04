@@ -95,7 +95,7 @@ def feedback():
 			db.row_factory = make_dicts
 			instructors = query_db("SELECT username FROM instructors", one=False)
 			print(instructors)
-			return render_template("feedback.html",instructors = instructors)
+			return render_template("feedback.html",instructors = instructors, message=request.args.get('message'))
 		return render_template("feedback.html")
 	return redirect(url_for('login'))
 
@@ -108,7 +108,7 @@ def remark():
 			remarks = query_db("SELECT username, mark_id, comment FROM remark_requests", one=False)
 			db.close()
 			return render_template("remark.html", remarks = remarks)
-	return render_template("remark.html")
+	return render_template("remark.html", message=request.args.get('message'))
 	#return redirect(url_for('login'))
 
 @app.route('/grades')
@@ -156,7 +156,7 @@ def remarkRequest():
 		db.commit()
 		db.close()
 		message="Your remark request has been submitted!"
-		return render_template("remark.html", message=message)
+		return redirect(url_for("remark", message=message))
 	return redirect("/login")
 
 @app.route('/sendFeedback', methods=['GET','POST'])
@@ -193,7 +193,8 @@ def sendFeedback():
 
 		db.commit()
 		db.close()
-		return redirect("/")
+		message="Your anonymous feedback has been submitted successfully!"
+		return redirect(url_for("feedback", message=message))
 	return redirect("/login")
 
 @app.route('/register',methods=['GET','POST'])
