@@ -174,7 +174,7 @@ def remarkRequest():
 
 		if request.method=='POST':
 
-			query_db("INSERT INTO remark_requests (username, mark_id, comment) VALUES (?, ?, ?)", [
+			query_db("INSERT INTO remark_requests (username, mark_id, comment, status) VALUES (?, ?, ?, 'in progress')", [
 				username, assignment, reason])
 			db.commit()
 			db.close()
