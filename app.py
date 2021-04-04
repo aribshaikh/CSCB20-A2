@@ -138,7 +138,7 @@ def remarkRequest():
 	student_session = session.get('student')
 	instructor_session = session.get('instructor')
 	render_template('grades.html')
-	username = session.get('student')
+	username = session.get('username')
 	assignment = request.form.get('aName')
 	reason = request.form.get('reason')
 		# if (assignment == 'Select an evaluation') or (reason == ''):
