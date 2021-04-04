@@ -135,27 +135,27 @@ def retrieveGrades():
 def remarkRequest():
 	if 'username' in session:
 
-	student_session = session.get('student')
-	instructor_session = session.get('instructor')
-	username = session.get('username')
-	assignment = request.form.get('aName')
-	reason = request.form.get('reason')
-		# if (assignment == 'Select an evaluation') or (reason == ''):
-		# 	return redirect(url_for('remark'))
+		student_session = session.get('student')
+		instructor_session = session.get('instructor')
+		username = session.get('username')
+		assignment = request.form.get('aName')
+		reason = request.form.get('reason')
+			# if (assignment == 'Select an evaluation') or (reason == ''):
+			# 	return redirect(url_for('remark'))
 
-		# else:
-	db = get_db()
-	db.row_factory = make_dicts
-		# insert into db
+			# else:
+		db = get_db()
+		db.row_factory = make_dicts
+			# insert into db
 
-	if request.method=='POST':
+		if request.method=='POST':
 
-		query_db("INSERT INTO remark_requests (username, mark_id, comment) VALUES (?, ?, ?)", [
-			username, assignment, reason])
-		db.commit()
-		db.close()
-		message="Your remark request has been submitted!"
-		return redirect(url_for("remark", message=message))
+			query_db("INSERT INTO remark_requests (username, mark_id, comment) VALUES (?, ?, ?)", [
+				username, assignment, reason])
+			db.commit()
+			db.close()
+			message="Your remark request has been submitted!"
+			return redirect(url_for("remark", message=message))
 	return redirect("/login")
 
 @app.route('/sendFeedback', methods=['GET','POST'])
