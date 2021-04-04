@@ -65,17 +65,33 @@
                 </div>
 
         </div>
+        <h2>My remark requests</h2>
+
+            {% for i in requests %}
+                <div class=Box>
+                    Assessment: {{i[0]}}
+                    <br>
+                    Status: {{i[1]}}
+                </div>
+            {% endfor %}
         {% endif %}
 
         {% if session['instructor'] %}
-        {% for requests in remarks %}
+            {% for requests in remarks %}
 
-            <div class = "remarkBox">
-                <h3>Assessment: {{requests['mark_id']}}</h3><br>
-                <p>Username: {{requests['username']}}</p><br>
-                <p>{{requests['comment']}}</p>
-            </div>
-        {% endfor %}
+                <div class = "remarkBox">
+                    <h3>Assessment: {{requests['mark_id']}}</h3><br>
+                    <p>Username: {{requests['username']}}</p><br>
+                    <p>{{requests['comment']}}</p>
+                    <p>Status: {{requests['status']}} {% if requests['status']=='in progress' %}
+                        <form action="/markAsDone" method="POST">
+                            <input type="hidden" name="mark_id" value="{{requests['mark_id']}}">
+                            <button type="submit">Mark as done</button>
+                        </form>
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
         {% endif %}
 
         <footer>

@@ -105,11 +105,35 @@ def remark():
 		if session.get('instructor'):
 			db = get_db()
 			db.row_factory = make_dicts
-			remarks = query_db("SELECT username, mark_id, comment FROM remark_requests", one=False)
+			remarks = query_db("SELECT username, mark_id, comment, status FROM remark_requests", one=False)
 			db.close()
 			return render_template("remark.html", remarks = remarks)
+		if session.get('student'):
+			db = get_db()
+			requests = query_db("SELECT mark_id, status FROM remark_requests where username=?"
+				, [session['username']], one=False)
+			db.close()
+			return render_template("remark.html", requests = requests)
 	return render_template("remark.html", message=request.args.get('message'))
 	#return redirect(url_for('login'))
+
+@app.route('/markAsDone', methods=['GET','POST'])
+def markAsDone():
+	if 'username' in session:
+		if request.method=="POST":
+			mark_id=request.form.get('mark_id')
+			print(mark_id)
+			db=get_db()
+			db.row_factory = make_dicts
+			query_db("update remark_requests set status = 'addressed' where username = ? and mark_id = ?"
+				, [session.get('username'), mark_id])
+			db.commit()
+			db.close()
+			print("hello")
+			return redirect(url_for('remark'))
+		else:
+			return redirect(url_for('remark'))
+	return redirect(url_for('login'))
 
 @app.route('/grades')
 def retrieveGrades():

@@ -31,6 +31,8 @@ CREATE TABLE IF NOT EXISTS remark_requests(
 	username VARCHAR(256) NOT NULL,
 	mark_id VARCHAR(256) NOT NULL,
 	comment VARCHAR(256),
+	status VARCHAR(256),
+	CHECK (status in ('in progress', 'addressed')),
 	FOREIGN KEY(username) REFERENCES students(username)
 	);
 	
@@ -76,6 +78,6 @@ INSERT INTO marks VALUES('student2', 'Q4', 30);
 INSERT INTO marks VALUES('student2', 'A1', 58);
 INSERT INTO marks VALUES('student2', 'A2', 99);
 
-INSERT INTO remark_requests VALUES('student2', 'A2', 'my last answer was graded wrong');
-INSERT INTO remark_requests VALUES('student1', 'Q2', 'my first answer was graded wrong');
-INSERT INTO remark_requests VALUES('a', 'Final', 'question 4 was graded wrong because ...');
+INSERT INTO remark_requests VALUES('student2', 'A2', 'my last answer was graded wrong', 'in progress');
+INSERT INTO remark_requests VALUES('student1', 'Q2', 'my first answer was graded wrong', 'in progress');
+INSERT INTO remark_requests VALUES('a', 'Final', 'question 4 was graded wrong because ...', 'in progress');
