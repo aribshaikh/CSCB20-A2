@@ -155,7 +155,8 @@ def remarkRequest():
 			username, assignment, reason])
 		db.commit()
 		db.close()
-		return redirect("/grades")
+		message="Your remark request has been submitted!"
+		return render_template("remark.html", message=message)
 	return redirect("/login")
 
 @app.route('/sendFeedback', methods=['GET','POST'])

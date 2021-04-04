@@ -43,10 +43,10 @@
                             <option>Q1</option>
                             <option>Q2</option>
                             <option>Q3</option>
+                            <option>Q4</option>
                             <option>A1</option>
                             <option>A2</option>
                             <option>A3</option>
-                            <option>A4</option>
                             <option>Final</option>
 
                         </select>
@@ -56,6 +56,11 @@
                             placeholder="Enter your constructive reason here..."></textarea>
         
                                 <input class='inputButton' type="submit" value="Submit Request">
+                        <br>
+                        <br>
+                        {% if message %}
+                            {{message}}
+                        {% endif %}
                     </form>
                 </div>
 
