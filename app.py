@@ -96,7 +96,6 @@ def feedback():
 			instructors = query_db("SELECT username FROM instructors", one=False)
 			print(instructors)
 			return render_template("feedback.html",instructors = instructors, message=request.args.get('message'))
-		return render_template("feedback.html")
 	return redirect(url_for('login'))
 
 @app.route('/remark')
@@ -114,8 +113,7 @@ def remark():
 				, [session['username']], one=False)
 			db.close()
 			return render_template("remark.html", requests = requests)
-	return render_template("remark.html", message=request.args.get('message'))
-	#return redirect(url_for('login'))
+	return redirect(url_for('login'))
 
 @app.route('/markAsDone', methods=['GET','POST'])
 def markAsDone():
@@ -153,7 +151,7 @@ def retrieveGrades():
 			db.close()
 			return render_template("grades.html", instructor_grades = instructor_grades)
 	
-	return render_template("grades.html")
+	return redirect(url_for('login'))
 
 @app.route('/remarkRequest', methods=['GET','POST'])
 def remarkRequest():
@@ -164,8 +162,6 @@ def remarkRequest():
 		username = session.get('username')
 		assignment = request.form.get('aName')
 		reason = request.form.get('reason')
-		print(reason)
-		print(assignment)
 		
 
 			# else:
@@ -186,7 +182,7 @@ def remarkRequest():
 			message="Your remark request has been submitted!"
 			flash("Your remark request has been submitted!")
 			return redirect(url_for("remark", message=message))
-	return redirect("/login")
+	return redirect(url_for('login'))
 
 @app.route('/sendFeedback', methods=['GET','POST'])
 def sendFeedback():
@@ -223,7 +219,7 @@ def sendFeedback():
 			message="Your anonymous feedback has been submitted successfully!"
 			flash("Your anonymous feedback has been submitted successfully!")
 			return redirect(url_for("feedback", message=message))
-	return redirect("/login")
+	return redirect(url_for('login'))
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -333,6 +329,8 @@ def instructorLogin():
 @app.route('/logout')
 def logout():
 	session.pop('username', None)
+	session.pop('student', None)
+	session.pop('instructor', None)
 	return redirect(url_for('login'))
 
 if __name__=="__main__":
