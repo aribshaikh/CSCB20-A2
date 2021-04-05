@@ -259,9 +259,14 @@ def register():
 				return render_template("register.html", error=error)
 		if usertype == "students":
 			sql2="insert into students values(?,?,?)"
+			query_db(sql2, [username, password, lecsession])
+			session['student'] = True
+			session['instructor'] = False
 		elif usertype == "instructors":
 			sql2="insert into instructors values(?,?,?)"
-		query_db(sql2, [username, password, lecsession])
+			query_db(sql2, [username, password, lecsession])
+			session['student'] = False
+			session['instructor'] = True
 		db.commit()
 		db.close()
 		session['username']=request.form['username']
