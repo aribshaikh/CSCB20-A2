@@ -63,9 +63,23 @@
                     <input class='inputButton' type="submit" value="Submit Feedback">
                     <br>
                     <br>
-                    {% if message %}
+                    <!-- {% if message %}
                         {{message}}
-                    {% endif %}
+                    {% endif %} -->
+                    {% with messages = get_flashed_messages() %}  
+                        {% if messages %}
+
+                              {% for message in messages %}  
+                              <div >
+
+                                   <p class="flashMessages">
+                                        {{ message }}
+                                </p>  
+                              {% endfor %}  
+                            </div>
+
+                        {% endif %}  
+                     {% endwith %} 
                 </form>
             </div>
 

@@ -58,10 +58,18 @@
                                 <input class='inputButton' type="submit" value="Submit Request">
                         <br>
                         <br>
-                        {% if message %}
-                            {{message}}
-                        {% endif %}
+                        
                     </form>
+                    <!-- {% if message %}
+                            <p class=error><strong>Error:</strong> {{ message }}
+                        {% endif %} -->
+                        {% with messages = get_flashed_messages() %}  
+                        {% if messages %}  
+                              {% for message in messages %}  
+                                   <p>{{ message }}</p>  
+                              {% endfor %}  
+                        {% endif %}  
+                     {% endwith %} 
                 </div>
 
         </div>

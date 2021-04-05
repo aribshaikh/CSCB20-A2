@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, render_template, request, g,session, redirect, url_for, escape
+from flask import Flask, render_template, request, g,session, redirect, url_for, escape, flash
 
 DATABASE = 'assignment3.db'
 
@@ -164,8 +164,9 @@ def remarkRequest():
 		username = session.get('username')
 		assignment = request.form.get('aName')
 		reason = request.form.get('reason')
-			# if (assignment == 'Select an evaluation') or (reason == ''):
-			# 	return redirect(url_for('remark'))
+		print(reason)
+		print(assignment)
+		
 
 			# else:
 		db = get_db()
@@ -173,51 +174,55 @@ def remarkRequest():
 			# insert into db
 
 		if request.method=='POST':
+			if (assignment == 'Select an evaluation') or (reason == ''):
+				# message="Please fill all the fields provided"
+				flash("*Please fill all the fields provided")
+				return redirect(url_for("remark"))
 
 			query_db("INSERT INTO remark_requests (username, mark_id, comment, status) VALUES (?, ?, ?, 'in progress')", [
 				username, assignment, reason])
 			db.commit()
 			db.close()
 			message="Your remark request has been submitted!"
+			flash("Your remark request has been submitted!")
 			return redirect(url_for("remark", message=message))
 	return redirect("/login")
 
 @app.route('/sendFeedback', methods=['GET','POST'])
 def sendFeedback():
-	# if 'username' in session:
+	if 'username' in session:
 
-	student_session = session.get('student')
-	instructor_session = session.get('instructor')
-	instructor = request.form.get('instructorname')
-	feedback1 = request.form.get('feedback1')
-	feedback2 = request.form.get('feedback2')
-	feedback3 = request.form.get('feedback3')
-	feedback4 = request.form.get('feedback4')
+		student_session = session.get('student')
+		instructor_session = session.get('instructor')
+		instructor = request.form.get('instructorname')
+		feedback1 = request.form.get('feedback1')
+		feedback2 = request.form.get('feedback2')
+		feedback3 = request.form.get('feedback3')
+		feedback4 = request.form.get('feedback4')
 
+		db = get_db()
+		db.row_factory = make_dicts
+			# insert into db
 
-		# if (assignment == 'Select an evaluation') or (reason == ''):
-		# 	return redirect(url_for('remark'))
+		if request.method=='POST':
+			if (instructor == 'Select an instructor') or (feedback1 == '') or (feedback2 == '') or (feedback3 == '') or (feedback4 == '') :
+				flash("*Please fill all the fields provided")
+				return redirect(url_for('feedback'))
 
-		# else:
-	db = get_db()
-	db.row_factory = make_dicts
-		# insert into db
+			query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
+				instructor, 'What do you like about the instructor teaching?', feedback1])
+			query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
+				instructor, 'What do you recommend the instructor to do to improve their teaching?', feedback2])	
+			query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
+				instructor, 'What do you like about the labs?', feedback3])	
+			query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
+				instructor, 'What do you recommend the lab instructors to do to improve their lab teaching?', feedback4])	
 
-	if request.method=='POST':
-
-		query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
-			instructor, 'What do you like about the instructor teaching?', feedback1])
-		query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
-			instructor, 'What do you recommend the instructor to do to improve their teaching?', feedback2])	
-		query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
-			instructor, 'What do you like about the labs?', feedback3])	
-		query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
-			instructor, 'What do you recommend the lab instructors to do to improve their lab teaching?', feedback4])	
-
-		db.commit()
-		db.close()
-		message="Your anonymous feedback has been submitted successfully!"
-		return redirect(url_for("feedback", message=message))
+			db.commit()
+			db.close()
+			message="Your anonymous feedback has been submitted successfully!"
+			flash("Your anonymous feedback has been submitted successfully!")
+			return redirect(url_for("feedback", message=message))
 	return redirect("/login")
 
 @app.route('/register',methods=['GET','POST'])
