@@ -69,7 +69,7 @@
 
         {% if session['instructor'] %}
         <div class='Box'>
-            <h2>Grades (Instructor View)</h2>
+            <h2>Grades</h2>
             <div class="table">
                 <div class="column">
                     <div class="headerrow">Assessment</div>
@@ -135,10 +135,62 @@
                 </div>
             </div>
         </div>
+
+        <div class="feedbackBox">
+                <h2>Enter Grades</h2>
+
+                <div class='feedbackFormBox'>
+
+
+            <form action="{{ url_for('enterGrades') }}" method="POST">
+                <label>Student</label>
+                    <select class="inputStyle" id="instructrNameDropdown" name="studentname">
+                        <option disabled selected>Select a student</option>
+                        {% for student in students %}
+                        <option>{{student['username']}}</option>
+                        {% endfor %}
+                    </select>
+
+                <label>Select an assessment</label>
+                    <select class="inputStyle" id="aDropDown" type="text" name="aName">
+                        <option disabled selected>Select an evaluation</option>
+                        <option>Q1</option>
+                        <option>Q2</option>
+                        <option>Q3</option>
+                        <option>Q4</option>
+                        <option>A1</option>
+                        <option>A2</option>
+                        <option>A3</option>
+                        <option>Final</option>
+
+                    </select>
+                <label>Enter Mark</label>
+                <input class='inputStyle' type="text" name="markvalue" placeholder="0-100">
+                <input class='inputButton' type="submit" value="Submit Feedback">
+            </form>
+            {% with messages = get_flashed_messages() %}  
+                        {% if messages %}
+
+                              {% for message in messages %}  
+                              <div >
+
+                                   <p class="flashMessages">
+                                        {{ message }}
+                                </p>  
+                              {% endfor %}  
+                            </div>
+
+                        {% endif %}  
+                     {% endwith %} 
+            </div>
+            
+        </div>
+
+        {% endif %}
+
         <footer>
                 <p>Authors: Arib Shaikh and Owen Chiu<br>
                 <br>
                 <a href="https://web.cs.toronto.edu/" target="_blank">Faculty of Computer Science at UofT</a></p>
             </footer>
-            {% endif %}
     </body>
