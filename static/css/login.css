@@ -50,10 +50,10 @@ body {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
-  border-radius: 5px;
+    border-radius: 5px;
     display: flex;
-  align-items: center;
-  justify-content: center
+    align-items: center;
+    justify-content: center
     }
 
   .opaque:hover {
@@ -66,10 +66,10 @@ body {
     box-sizing: border-box;
     height: 100%;
     width: 100%;
-  border-radius: 5px;
+    border-radius: 5px;
     display: flex;
-  align-items: center;
-  justify-content: center
+    align-items: center;
+    justify-content: center
     }
 
   .transparent:hover {
@@ -78,13 +78,13 @@ body {
 
   .opaqLink{
     color: black;
-margin: 0
+    margin: 0
     }
 
   .transpLink{
     color: white;
     opacity:0.5;
-margin: 0
+    margin: 0
     }
 
   .loginFormBox {
