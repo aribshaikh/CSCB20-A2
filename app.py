@@ -42,77 +42,86 @@ def close_connection(exception):
 @app.route('/')
 def index():
 	if 'username' in session:
-		return render_template("index.html")
+		user_id = session["username"]
+		return render_template("index.html", user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/calendar')
 def calendar():
 	if 'username' in session:
-		return render_template("calendar.html")
+		user_id = session["username"]
+		return render_template("calendar.html", user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/lectures')
 def lectures():
 	if 'username' in session:
-		return render_template("lectures.html")
+		user_id = session["username"]
+		return render_template("lectures.html", user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/tutorials')
 def tutorials():
 	if 'username' in session:
-		return render_template("tutorials.html")
+		user_id = session["username"]
+		return render_template("tutorials.html", user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/assignments')
 def assignments():
 	if 'username' in session:
-		return render_template("assignments.html")
+		user_id = session["username"]
+		return render_template("assignments.html", user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/tests')
 def tests():
 	if 'username' in session:
-		return render_template("tests.html")
+		user_id = session["username"]
+		return render_template("tests.html", user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/links')
 def links():
 	if 'username' in session:
-		return render_template("links.html")
+		user_id = session["username"]
+		return render_template("links.html", user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/feedback')
 def feedback():
 	if 'username' in session:
+		user_id = session["username"]
 		if session.get('instructor'):
 			db = get_db()
 			db.row_factory = make_dicts
 			feedbacks = query_db("SELECT question, comment FROM feedback WHERE username = ?",[session['username']], one=False)
 			db.close()
-			return render_template("feedback.html", feedbacks = feedbacks)
+			return render_template("feedback.html", feedbacks = feedbacks, user_id = user_id)
 		elif session.get('student'):
 			db = get_db()
 			db.row_factory = make_dicts
 			instructors = query_db("SELECT username FROM instructors", one=False)
 			print(instructors)
-			return render_template("feedback.html",instructors = instructors, message=request.args.get('message'))
+			return render_template("feedback.html",instructors = instructors, message=request.args.get('message'), user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/remark')
 def remark():
 	if 'username' in session:
+		user_id = session["username"]
 		if session.get('instructor'):
 			db = get_db()
 			db.row_factory = make_dicts
 			remarks = query_db("SELECT username, mark_id, comment, status FROM remark_requests", one=False)
 			db.close()
-			return render_template("remark.html", remarks = remarks)
+			return render_template("remark.html", remarks = remarks, user_id = user_id)
 		if session.get('student'):
 			db = get_db()
 			requests = query_db("SELECT mark_id, status FROM remark_requests where username=?"
 				, [session['username']], one=False)
 			db.close()
-			return render_template("remark.html", requests = requests)
+			return render_template("remark.html", requests = requests, user_id = user_id)
 	return redirect(url_for('login'))
 
 @app.route('/markAsDone', methods=['GET','POST'])
@@ -136,6 +145,7 @@ def markAsDone():
 @app.route('/grades')
 def retrieveGrades():
 	if 'username' in session:
+		user_id = session["username"]
 		student_session = session.get('student')
 		instructor_session = session.get('instructor')
 		db = get_db()
@@ -144,7 +154,7 @@ def retrieveGrades():
 			student_grades = query_db(
 				"SELECT mark_id, mark FROM marks WHERE username = ?",[session['username']] , one=False)
 			db.close()
-			return render_template("grades.html", student_grades = student_grades)
+			return render_template("grades.html", student_grades = student_grades, user_id = user_id)
 		if instructor_session:
 			students = query_db("SELECT username FROM students", one=False)
 			sql ="""select s.username,	sum(case when m.mark_id = 'Q1' then m.mark end) Q1
@@ -160,7 +170,7 @@ def retrieveGrades():
 				group by s.username"""
 			instructor_grades = query_db(sql, one=False)
 			db.close()
-			return render_template("grades.html", instructor_grades = instructor_grades, students = students)
+			return render_template("grades.html", instructor_grades = instructor_grades, students = students, user_id = user_id)
 	
 	return redirect(url_for('login'))
 
