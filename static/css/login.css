@@ -1,7 +1,14 @@
 body {
     display: flex;
   }
-  
+
+  html { 
+    background: url(UofT83938_DSC_1925.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
   
   .loginBox {
     background-color: rgb(231, 231, 231);

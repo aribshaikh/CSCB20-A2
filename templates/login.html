@@ -14,30 +14,30 @@
     </head>
 
     <body>
-            <div class='loginBox'>
-                    <h2>CSCB20 Student Login Page</h2>
-            <div class='loginFormBox'>
-                    <form action="/login" method="POST">
-                        <label>Username</label>
-                        <input class='inputStyle' type="text" name="username" placeholder="Username">
-        
-                        <label>Password</label>
-                        <input class='inputStyle' type="password" name="password" placeholder="Password">
-        
-                            <div>
-                                <input class='inputButton' type="submit" value="Log In">
-                            </div>
-                            {% if error %}
-                                <p class=error><strong>Error:</strong> {{ error }}
-                            {% endif %}
-                            <div>
-                                <br>Not a student? <a href="./instructorLogin">Take me to the instructor login page!</a>
-                                <br>
-                                <br>Don't have an account? <a href="./register">Create account here</a>.
-                            </div>
+        <div class='loginBox'>
+                <h2>CSCB20 Student Login Page</h2>
+        <div class='loginFormBox'>
+                <form action="/login" method="POST">
+                    <label>Username</label>
+                    <input class='inputStyle' type="text" name="username" placeholder="Username">
+    
+                    <label>Password</label>
+                    <input class='inputStyle' type="password" name="password" placeholder="Password">
+    
+                        <div>
+                            <input class='inputButton' type="submit" value="Log In">
                         </div>
-                    </form>
-                </div>
+                        {% if error %}
+                            <p class=error><strong>Error:</strong> {{ error }}
+                        {% endif %}
+                        <div>
+                            <br>Not a student? <a href="./instructorLogin">Take me to the instructor login page!</a>
+                            <br>
+                            <br>Don't have an account? <a href="./register">Create account here</a>.
+                        </div>
+                    </div>
+                </form>
+            </div>
             <footer>
                     <p>Authors: Arib Shaikh and Owen Chiu<br>
                     <br>
