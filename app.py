@@ -203,6 +203,7 @@ def enterGrades():
 				username, assessment, mark])
 			db.commit()
 			db.close()
+			flash("Your grades have been submitted successfully!")
 			return redirect("/grades")
 		else:
 			return redirect("/grades")

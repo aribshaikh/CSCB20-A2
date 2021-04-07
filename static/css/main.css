@@ -45,22 +45,22 @@ body {
     margin-top: 7px;
     margin-bottom: 20px;
     padding: 15px;
-    resize: vertical; /* ability resize the textarea vertically */
+    resize: vertical;
   }
   
   .feedbackTextArea {
-    height: 100px;
+    height: 105px;
   }
   
   .inputButton {
-    background-color: #061e40;
+    background-color: #051b3a;
     color: white;
+    padding: 11px 21px;
     font-size: 14px;
-    padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
   .inputButton:hover {
-    background-color: #55a6d9;
+    background-color: #53a3d4;
   }
