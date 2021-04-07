@@ -1,0 +1,92 @@
+body {
+    display: flex;
+  }
+
+  html {
+    background: url(UofT83938_DSC_1925.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .loginBox {
+    background-color: rgb(231, 231, 231);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin:0px auto;
+    margin-top:80px;
+    margin-bottom: 52px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    border-radius: 15px;
+    padding: 40px 46px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .outerSwitch{
+  display: flex;
+  flex-direction:row;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  }
+  .innerSwitch{
+  flex: 1 1 1px;
+  height:100%;
+  width: 100%;
+  }
+  .opaque{
+    background: white;
+    border: 4px solid #25355A;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+  border-radius: 5px;
+    }
+
+  .opaque:hover {
+    background-color: #53a3d4;
+  }
+
+  .transparent{
+    background: grey;
+    border: 1px solid black;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+  border-radius: 5px;
+    }
+
+  .transparent:hover {
+    background-color: #53a3d4;
+  }
+
+  .opaqLink{
+    color: black;
+    }
+
+  .transpLink{
+    color: white;
+    opacity:0.5;
+    }
+
+  .loginFormBox {
+    background-color: white;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin:0px auto;
+  margin-top:40px;
+  margin-bottom: 82px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  padding: 20px 16px;
+  text-align: center;
+  justify-content: center;
+
+  }
+
+  
