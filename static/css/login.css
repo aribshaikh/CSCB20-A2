@@ -26,6 +26,52 @@ body {
     justify-content: center;
     align-items: center;
   }
+  .outerSwitch{
+  display: flex;
+  flex-direction:row;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  }
+  .innerSwitch{
+  flex: 1 1 1px;
+  height:100%;
+  width: 100%;
+  }
+  .opaque{
+    background: white;
+    border: 4px solid #25355A;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+  border-radius: 5px;
+    }
+
+  .opaque:hover {
+    background-color: #53a3d4;
+  }
+
+  .transparent{
+    background: grey;
+    border: 1px solid black;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+  border-radius: 5px;
+    }
+
+  .transparent:hover {
+    background-color: #53a3d4;
+  }
+
+  .opaqLink{
+    color: black;
+    }
+
+  .transpLink{
+    color: white;
+    opacity:0.5;
+    }
+
   .loginFormBox {
     background-color: white;
   display: flex;
