@@ -94,7 +94,7 @@
                     <p>Status: {{requests['status']}} {% if requests['status']=='in progress' %}
                         <form action="/markAsDone" method="POST">
                             <input type="hidden" name="mark_id" value="{{requests['mark_id']}}">
-                            <button type="submit">Mark as done</button>
+                            <button class = "inputButton" type="submit">Mark as done</button>
                         </form>
                         {% endif %}
                     </p>
