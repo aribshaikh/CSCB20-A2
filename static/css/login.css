@@ -78,13 +78,15 @@ body {
 
   .opaqLink{
     color: black;
-    margin: 0
+    text-decoration: none;
+    margin: 0;
     }
 
   .transpLink{
     color: white;
+    text-decoration: none;
     opacity:0.5;
-    margin: 0
+    margin: 0;
     }
 
   .loginFormBox {

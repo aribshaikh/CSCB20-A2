@@ -92,17 +92,20 @@ def links():
 def feedback():
 	if 'username' in session:
 		user_id = session["username"]
+		# loading up different views based on student, instructor
 		if session.get('instructor'):
 			db = get_db()
 			db.row_factory = make_dicts
+
+			# retrieving all feedbacks for a specific instructor from sql, sending them to html
 			feedbacks = query_db("SELECT question, comment FROM feedback WHERE username = ?",[session['username']], one=False)
 			db.close()
 			return render_template("feedback.html", feedbacks = feedbacks, user_id = user_id)
 		elif session.get('student'):
 			db = get_db()
 			db.row_factory = make_dicts
+			# retrieving all instructors available to provide feedback to
 			instructors = query_db("SELECT username FROM instructors", one=False)
-			print(instructors)
 			return render_template("feedback.html",instructors = instructors, message=request.args.get('message'), user_id = user_id)
 	return redirect(url_for('login'))
 
@@ -110,14 +113,18 @@ def feedback():
 def remark():
 	if 'username' in session:
 		user_id = session["username"]
+
+		# loading up different views based on student, instructor
 		if session.get('instructor'):
 			db = get_db()
 			db.row_factory = make_dicts
+			# retrieving all remark requests to view for instructor
 			remarks = query_db("SELECT username, mark_id, comment, status FROM remark_requests", one=False)
 			db.close()
 			return render_template("remark.html", remarks = remarks, user_id = user_id)
 		if session.get('student'):
 			db = get_db()
+			# retrieving status of a user's remark request
 			requests = query_db("SELECT mark_id, status FROM remark_requests where username=?"
 				, [session['username']], one=False)
 			db.close()
@@ -129,14 +136,12 @@ def markAsDone():
 	if 'username' in session:
 		if request.method=="POST":
 			mark_id=request.form.get('mark_id')
-			print(mark_id)
 			db=get_db()
 			db.row_factory = make_dicts
 			query_db("update remark_requests set status = 'addressed' where username = ? and mark_id = ?"
 				, [session.get('username'), mark_id])
 			db.commit()
 			db.close()
-			print("hello")
 			return redirect(url_for('remark'))
 		else:
 			return redirect(url_for('remark'))
@@ -151,11 +156,14 @@ def retrieveGrades():
 		db = get_db()
 		db.row_factory = make_dicts
 		if student_session:
+			# retrieving all grades for a specific user
 			student_grades = query_db(
 				"SELECT mark_id, mark FROM marks WHERE username = ?",[session['username']] , one=False)
 			db.close()
 			return render_template("grades.html", student_grades = student_grades, user_id = user_id)
 		if instructor_session:
+
+			# retrieving all marks for all students
 			students = query_db("SELECT username FROM students", one=False)
 			sql ="""select s.username,	sum(case when m.mark_id = 'Q1' then m.mark end) Q1
 				,	sum(case when m.mark_id = 'Q2' then m.mark end) Q2
@@ -178,13 +186,14 @@ def retrieveGrades():
 def enterGrades():
 	if 'username' in session:
 		if request.method=='POST':
+			# getting all values for POST request
 			db = get_db()
 			db.row_factory = make_dicts
 			username = request.form.get('studentname')
 			assessment = request.form.get('aName')
 			mark = request.form.get('markvalue')
-			print(type(mark))
-		
+
+			# error check for empty, string and integer values
 			if (username == 'Select an instructor') or (assessment == 'Select an assessment') or (mark == '') or (not mark.isdigit()):
 				flash("*Please fill all the fields provided")
 				return redirect("/grades")
@@ -192,9 +201,9 @@ def enterGrades():
 				flash("*Enter a mark between 0 - 100")
 				return redirect("/grades")
 
-			# students = query_db("SELECT username FROM marks", one=False)
+			# checking if user with a given mark exists
 			marks = query_db("SELECT username FROM marks where username = ? and mark_id = ?",[username, assessment])
-			print(marks)
+			# if user doesn't have a mark, we do an INSERT INTO statement, whereas if a student does its UPDATE
 			if marks:
 				query_db("update marks set mark = ? where username = ? and mark_id = ?"
 				,[mark, username, assessment])
@@ -213,7 +222,7 @@ def enterGrades():
 @app.route('/remarkRequest', methods=['GET','POST'])
 def remarkRequest():
 	if 'username' in session:
-
+		# getting all values for POST request
 		student_session = session.get('student')
 		instructor_session = session.get('instructor')
 		username = session.get('username')
@@ -221,17 +230,16 @@ def remarkRequest():
 		reason = request.form.get('reason')
 		
 
-			# else:
 		db = get_db()
 		db.row_factory = make_dicts
-			# insert into db
-
+		
 		if request.method=='POST':
+			# error check
 			if (assignment == 'Select an evaluation') or (reason == ''):
-				# message="Please fill all the fields provided"
 				flash("*Please fill all the fields provided")
 				return redirect(url_for("remark"))
 
+			# inserting remark request into database
 			query_db("INSERT INTO remark_requests (username, mark_id, comment, status) VALUES (?, ?, ?, 'in progress')", [
 				username, assignment, reason])
 			db.commit()
@@ -258,10 +266,12 @@ def sendFeedback():
 			# insert into db
 
 		if request.method=='POST':
+			# error check
 			if (instructor == 'Select an instructor') or (feedback1 == '') or (feedback2 == '') or (feedback3 == '') or (feedback4 == '') :
 				flash("*Please fill all the fields provided")
 				return redirect(url_for('feedback'))
 
+			# inserting feedback values into sql
 			query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
 				instructor, 'What do you like about the instructor teaching?', feedback1])
 			query_db("INSERT INTO feedback (username, question, comment) VALUES (?, ?, ?)", [
@@ -304,7 +314,6 @@ def register():
 			sql1 = "SELECT * FROM instructors"
 		
 		db = get_db()
-        # db.row_factory = make_dicts
 		results = query_db(sql1, args=(), one=False)
 		for result in results:
 			if result[0]==username:

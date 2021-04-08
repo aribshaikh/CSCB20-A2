@@ -82,8 +82,10 @@ body {
 
   .transpLink{
     color: white;
+    text-decoration: none;
     opacity:0.5;
     margin: 0
+    
     }
 
   .loginFormBox {
