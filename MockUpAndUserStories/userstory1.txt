@@ -1,1 +1,0 @@
-As a student user, when a student navigates to the url, the website should be able to showcase the navigation links and front page (course description, instructor description, and syllabus)

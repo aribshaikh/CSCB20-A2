@@ -1,1 +1,0 @@
-As a student user, the student should be able to view instructor information on the homepage

@@ -1,1 +1,0 @@
-As a student user, when a student navigates to the lectures portion of the site, they should be able to access lecture material for all the lectures.
